@@ -11,4 +11,6 @@ import scrapy
 class ZhaopinspiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    title = scrapy.Field()
+    phone = scrapy.Field()
+    last_updated = scrapy.Field(serializer=str)
