@@ -19,7 +19,12 @@ NEWSPIDER_MODULE = 'zhaoPinSpider.spiders'
 #USER_AGENT = 'zhaoPinSpider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
+
+DOWNLOADER_MIDDLEWARES = {
+    'zhaoPinSpider.DownloadMiddleware.ZhaopinMiddleware': 200, #键为中间件类的路径，值为中间件的顺序
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware':None, #禁止内置的中间件
+}
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -64,9 +69,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'zhaoPinSpider.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'zhaoPinSpider.pipelines.ZhaopinspiderPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
