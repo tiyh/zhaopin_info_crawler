@@ -6,7 +6,8 @@ import time
 class ZhaopinMiddleware(object):
 
     def process_request(self, request, spider):
-        if spider.name == "zhaopin" and request.url.startswith("https://sou.zhaopin.com"):
+        if (spider.name == "zhaopin" and request.url.startswith("https://sou.zhaopin.com")) \
+            or(spider.name == "qiancheng" and request.url.startswith("https://search.51job.com")):
             driver = webdriver.PhantomJS() 
             #driver = webdriver.Firefox()
             driver.get(request.url)

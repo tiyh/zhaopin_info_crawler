@@ -17,5 +17,8 @@ class ZhaopinspiderPipeline(object):
     def process_item(self, item, spider):
         line = [item['title'], item['phone']]
         self.ws.append(line)
-        self.wb.save('/home/chris/scrapy/zhaoPinSpider/zhaopin.xlsx')
+        if (spider.name == "qiancheng"):
+            self.wb.save('/home/chris/scrapy/zhaoPinSpider/qiancheng.xlsx')
+        elif (spider.name == "zhaopin"):
+            self.wb.save('/home/chris/scrapy/zhaoPinSpider/zhaopin.xlsx')
         return item
