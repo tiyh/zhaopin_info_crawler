@@ -5,7 +5,6 @@ import time
 import sys
 import random
 from scrapy.spiders import Spider
-from scrapy.selector import Selector
 from zhaoPinSpider.items import ZhaopinspiderItem
 
 
@@ -34,6 +33,7 @@ class ZhaopinSpider(scrapy.Spider):
     def deal_content(self,response): 
         reload(sys)
         sys.setdefaultencoding("utf-8")
+        #self.log('User-Agent:%s'% response.request.headers['User-Agent'])
         introContents = re.findall('<div class="intro-content">(.*?)</div>',response.body,re.S)
         for introContent in introContents:
 			#print introContent.replace(u'\xa0', u' ')
