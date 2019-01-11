@@ -26,8 +26,8 @@ class ZhaopinSpider(scrapy.Spider):
     def parse(self, response):
         content_urls = response.xpath("//div[@class='contentpile__content__wrapper__item clearfix']/a/@href").extract()
         for url in content_urls:
-        	time.sleep(random.random())
-        	yield scrapy.Request(url, callback=self.deal_content)
+            #time.sleep(random.random())
+            yield scrapy.Request(url, callback=self.deal_content)
         pass
 
     def deal_content(self,response): 

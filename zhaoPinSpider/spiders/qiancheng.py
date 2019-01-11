@@ -20,7 +20,7 @@ class ZhaopinSpider(scrapy.Spider):
     def parse(self, response):
         content_urls = response.xpath("//div[@class='el']/p/span/a/@href").extract()
         for url in content_urls:
-            time.sleep(random.random())
+            #time.sleep(random.random())
             yield scrapy.Request(url, callback=self.deal_content)
         pass
 
