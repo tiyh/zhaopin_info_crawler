@@ -1,5 +1,5 @@
 # zhaopin_info_crawler
-crawl phone numbers and titles on jobs.zhaopin.com for Jinan job fair sponsor
+crawl phone numbers and titles on www.zhaopin.com/ and www.51job.com/ for Jinan job fair sponsor
 
 Scrapy + Selenium + PhantomJS
 
@@ -25,3 +25,4 @@ Scrapy + Selenium + PhantomJS
 #### Run:
 
     scrapy crawl zhaopin
+    scrapy crawl qiancheng
