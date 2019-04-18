@@ -13,8 +13,12 @@ class ZhaopinSpider(scrapy.Spider):
     name = "zhaopin"
     allowed_domains = ["sou.zhaopin.com","jobs.zhaopin.com"]
     #start_urls = ['https://sou.zhaopin.com/?jl=702']
-
-    start_urls = map(lambda i: r"https://sou.zhaopin.com/?p="+str(i)+r"&jl=702", range(1,13))
+    #jinan:702 
+    #zhengzhou 719
+    #nanjing 635
+    #hangzhou 653
+    #shijiazhuang 565
+    start_urls = map(lambda i: r"https://sou.zhaopin.com/?p="+str(i)+r"&jl=565", range(1,13))
     '''
     def start_requests(self):
     	#for i in range(2,8): 
@@ -27,6 +31,8 @@ class ZhaopinSpider(scrapy.Spider):
         content_urls = response.xpath("//div[@class='contentpile__content__wrapper__item clearfix']/a/@href").extract()
         for url in content_urls:
             #time.sleep(random.random())
+            self.log('---len: %d----------------url: %s' % (len(content_urls),url))
+            time.sleep(random.random()/2)
             yield scrapy.Request(url, callback=self.deal_content)
         pass
 
@@ -34,7 +40,7 @@ class ZhaopinSpider(scrapy.Spider):
         reload(sys)
         sys.setdefaultencoding("utf-8")
         #self.log('User-Agent:%s'% response.request.headers['User-Agent'])
-        introContents = re.findall('<div class="intro-content">(.*?)</div>',response.body,re.S)
+        introContents = re.findall('<div class="describtion__detail-content">(.*?)</div>',response.body,re.S)
         for introContent in introContents:
 			#print introContent.replace(u'\xa0', u' ')
 			#unicode中的‘\xa0’字符在转换成gbk编码时会出现问题，gbk无法转换'\xa0'字符,将'\xa0‘替换成u' '空格。
