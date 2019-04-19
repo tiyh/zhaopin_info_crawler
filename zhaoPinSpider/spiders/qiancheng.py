@@ -6,10 +6,9 @@ import sys
 import random
 from scrapy.spiders import Spider
 from zhaoPinSpider.items import ZhaopinspiderItem
+from zhaoPinSpider.spiders.base import BaseSpider
 
-
-
-class ZhaopinSpider(scrapy.Spider):
+class ZhaopinSpider(BaseSpider,scrapy.Spider):
     name = "qiancheng"
     allowed_domains = ["search.51job.com","jobs.51job.com"]
 
@@ -44,4 +43,3 @@ class ZhaopinSpider(scrapy.Spider):
                     self.log('---------------titles not matched--------------')
             else: 
                 self.log('---------------phoneNums not matched--------------')
-

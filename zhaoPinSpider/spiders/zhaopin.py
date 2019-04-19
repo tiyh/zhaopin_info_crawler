@@ -6,10 +6,10 @@ import sys
 import random
 from scrapy.spiders import Spider
 from zhaoPinSpider.items import ZhaopinspiderItem
+from zhaoPinSpider.spiders.base import BaseSpider
 
 
-
-class ZhaopinSpider(scrapy.Spider):
+class ZhaopinSpider(BaseSpider,scrapy.Spider):
     name = "zhaopin"
     allowed_domains = ["sou.zhaopin.com","jobs.zhaopin.com"]
     #start_urls = ['https://sou.zhaopin.com/?jl=702']
