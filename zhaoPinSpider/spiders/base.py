@@ -18,7 +18,7 @@ class BaseSpider(scrapy.Spider):
 
     def spider_closed(self, spider):
         self.log('---------------spider_closed-------------')
-        r = redis.Redis(host='127.0.0.1',port=6379)
+        r = redis.Redis(host='127.0.0.1',password='3664',port=6379)
         xls_name = self.name+r"_all.xlsx"
         if not os.path.isfile(xls_name) :
             os.mknod(xls_name)

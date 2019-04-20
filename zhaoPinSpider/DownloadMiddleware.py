@@ -24,8 +24,8 @@ class ZhaopinMiddleware(object):
 
     def process_request(self, request, spider):
         request.headers['User-Agent']=random.choice(self.user_agent_list)
-        if (spider.name == "zhaopin" and request.url.startswith("https://sou.zhaopin.com")) \
-            or(spider.name == "qiancheng" and request.url.startswith("https://search.51job.com")):
+        if (spider.name.startswith("zhaopin") and request.url.startswith("https://sou.zhaopin.com")) \
+            or(spider.name.startswith("qiancheng") and request.url.startswith("https://search.51job.com")):
             driver = webdriver.PhantomJS() 
             #driver = webdriver.Firefox()
             driver.get(request.url)
