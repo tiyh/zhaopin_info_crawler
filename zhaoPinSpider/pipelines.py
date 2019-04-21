@@ -19,12 +19,12 @@ class ZhaopinspiderPipeline(object):
         line = [item['title'], item['phone']]
         #self.ws.append(line)
         self.r.hset(spider.name,item['phone'],item['title'].decode('utf-8'))
-        if (spider.name.startswith("qiancheng")):
+        #if (spider.name.startswith("qiancheng")):
             #self.r.hset('qiancheng_zhengzhou',item['phone'],item['title'].decode('utf-8'))
             #self.r.hset('qiancheng_zhengzhou_500_1879',item['phone'],item['title'].decode('utf-8'))
             #self.wb.save('/home/chris/scrapy/zhaoPinSpider/qiancheng-zhengzhou.xlsx')
             
-            self.r.hset('qiancheng_zhengzhou',item['phone'],item['title'].decode('utf-8'))
+            #self.r.hset('qiancheng',item['phone'],item['title'].decode('utf-8'))
             #self.r.hset('qiancheng_nanjing_1_500',item['phone'],item['title'].decode('utf-8'))
             #self.r.hset('qiancheng_nanjing_500_2000',item['phone'],item['title'].decode('utf-8'))
         #elif (spider.name == "zhaopin"):
