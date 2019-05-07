@@ -18,7 +18,10 @@ class ZhaopinspiderPipeline(object):
     def process_item(self, item, spider):
         line = [item['title'], item['phone']]
         #self.ws.append(line)
+        if (self.r.hexists(spider.name,item['phone']) == 0) :
+            self.r.hset(spider.name+spider.new_element_name,item['phone'],item['title'].decode('utf-8'))
         self.r.hset(spider.name,item['phone'],item['title'].decode('utf-8'))
+
         #if (spider.name.startswith("qiancheng")):
             #self.r.hset('qiancheng_zhengzhou',item['phone'],item['title'].decode('utf-8'))
             #self.r.hset('qiancheng_zhengzhou_500_1879',item['phone'],item['title'].decode('utf-8'))
