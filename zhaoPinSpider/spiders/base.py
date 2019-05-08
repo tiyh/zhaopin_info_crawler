@@ -6,6 +6,7 @@ from scrapy.spiders import Spider
 from scrapy import signals
 from openpyxl import Workbook
 import redis
+import ConfigParser
 
 
 class BaseSpider(scrapy.Spider):
@@ -19,7 +20,17 @@ class BaseSpider(scrapy.Spider):
 
     def spider_closed(self, spider):
         self.log('---------------spider_closed-------------')
-        r = redis.Redis(host='127.0.0.1',password='3664',port=6379)
+
+        cf = ConfigParser.ConfigParser()
+        cf.read("scrapy.cfg")
+        db_host = cf.get("redis", "host")
+        db_port = cf.getint("redis", "port")
+        db_pass = cf.get("redis", "pass")
+        if db_pass.strip():
+            r = redis.Redis(host=db_host,password=db_pass,port=db_port)
+        else:
+            r = redis.Redis(host=db_host,port=db_port)
+
         xls_name = self.name+r"_all.xlsx"
         if not os.path.isfile(xls_name) :
             os.mknod(xls_name)

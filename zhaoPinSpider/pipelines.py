@@ -6,6 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import redis
 from openpyxl import Workbook
+import ConfigParser
 
 
 class ZhaopinspiderPipeline(object):
@@ -14,7 +15,17 @@ class ZhaopinspiderPipeline(object):
         #self.ws = self.wb.active
         #self.ws.append(['工作名称', '联系方式'])
         #self.log('+++++++++++++++++++++++++++++++++init+++++++++++++++++++++++++++++++++++++++++++++++++')
-        self.r = redis.Redis(host='127.0.0.1',password='3664',port=6379)
+
+        cf = ConfigParser.ConfigParser()
+        cf.read("scrapy.cfg")
+        db_host = cf.get("redis", "host")
+        db_port = cf.getint("redis", "port")
+        db_pass = cf.get("redis", "pass")
+        if db_pass.strip():
+            self.r = redis.Redis(host=db_host,password=db_pass,port=db_port)
+        else:
+            self.r = redis.Redis(host=db_host,port=db_port)
+
     def process_item(self, item, spider):
         line = [item['title'], item['phone']]
         #self.ws.append(line)

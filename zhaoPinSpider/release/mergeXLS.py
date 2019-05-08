@@ -1,13 +1,22 @@
 # -*- coding: utf-8 -*-
 import time
 import os
+import ConfigParser
 if __name__ == '__main__':
 	try:
 		import psyco
 		psyco.profile()
 	except ImportError:
 		pass
-	r = redis.Redis(host='127.0.0.1',password='3664',port=6379)
+    cf = ConfigParser.ConfigParser()
+    cf.read("scrapy.cfg")
+    db_host = cf.get("redis", "host")
+    db_port = cf.getint("redis", "port")
+    db_pass = cf.get("redis", "pass")
+    if db_pass.strip():
+        r = redis.Redis(host=db_host,password=db_pass,port=db_port)
+    else:
+        r = redis.Redis(host=db_host,port=db_port)
 	#tasks = ["zhaopin_nanjing","zhaopin_shijiazhuang","zhaopin_zhengzhou","zhaoping_hangzhou", \
 	#"qiancheng_nanjing","qiancheng_shijiazhuang","qiancheng_zhengzhou","qiancheng_hangzhou"]
 	tasks = {"qiancheng_hangzhou":"qiancheng_shaoxing",
