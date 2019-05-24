@@ -1,7 +1,7 @@
 # zhaopin_info_crawler
-crawl phone numbers and titles on www.zhaopin.com/ and www.51job.com/ for Jinan job fair sponsor
+crawl phone numbers and titles on www.zhaopin.com/ and www.51job.com/ for job fair sponsor
 
-Scrapy + Selenium + PhantomJS
+Scrapy + Selenium + PhantomJS + Redis 
 
 #### Setup environment
 1. scrapy : 
@@ -22,7 +22,15 @@ Scrapy + Selenium + PhantomJS
   
     sudo pip  install openpyxl
 
+4.  Redis
+    pip install redis
+
+    redis-cli -h localhost -p 6379 -a {password} --raw
+
 #### Run:
 
-    scrapy crawl zhaopin
-    scrapy crawl qiancheng
+    scrapy crawl {spider_name}
+
+    or using release script :
+    cd release/ && python release.py
+
