@@ -7,11 +7,12 @@ from scrapy import signals
 from openpyxl import Workbook
 import redis
 import ConfigParser
+import logging
 
 
 class BaseSpider(scrapy.Spider):
     name = "base"
-    new_element_name = "_new_1"
+    new_element_name = "_new_2"
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
         spider = super(BaseSpider,cls).from_crawler(crawler, *args, **kwargs)
@@ -20,15 +21,18 @@ class BaseSpider(scrapy.Spider):
 
     def spider_closed(self, spider):
         self.log('---------------spider_closed-------------')
-
+        CONFIG_FILE_PATH = os.path.abspath('.')+r"/scrapy.cfg"
+        logging.warning('CONFIG_FILE_PATH:%s'%CONFIG_FILE_PATH)
         cf = ConfigParser.ConfigParser()
-        cf.read("scrapy.cfg")
+        cf.read(CONFIG_FILE_PATH)
         db_host = cf.get("redis", "host")
         db_port = cf.getint("redis", "port")
         db_pass = cf.get("redis", "pass")
         if db_pass.strip():
+            self.log('pass:%s'%db_pass)
             r = redis.Redis(host=db_host,password=db_pass,port=db_port)
         else:
+            self.log('db_port:%s'%db_port)
             r = redis.Redis(host=db_host,port=db_port)
 
         xls_name = self.name+r"_all.xlsx"

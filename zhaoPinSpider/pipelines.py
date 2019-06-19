@@ -7,6 +7,8 @@
 import redis
 from openpyxl import Workbook
 import ConfigParser
+import os
+import logging
 
 
 class ZhaopinspiderPipeline(object):
@@ -14,10 +16,12 @@ class ZhaopinspiderPipeline(object):
         #self.wb = Workbook()
         #self.ws = self.wb.active
         #self.ws.append(['工作名称', '联系方式'])
-        #self.log('+++++++++++++++++++++++++++++++++init+++++++++++++++++++++++++++++++++++++++++++++++++')
 
+        #self.log('+++++++++++++++++++++++++++++++++init+++++++++++++++++++++++++++++++++++++++++++++++++')
+        CONFIG_FILE_PATH = os.path.abspath('.')+r"/scrapy.cfg"
         cf = ConfigParser.ConfigParser()
-        cf.read("scrapy.cfg")
+        logging.warning('CONFIG_FILE_PATH:%s'%CONFIG_FILE_PATH)
+        cf.read(CONFIG_FILE_PATH)
         db_host = cf.get("redis", "host")
         db_port = cf.getint("redis", "port")
         db_pass = cf.get("redis", "pass")
