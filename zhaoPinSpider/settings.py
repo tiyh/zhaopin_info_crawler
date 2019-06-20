@@ -8,6 +8,7 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import datetime
 
 BOT_NAME = 'zhaoPinSpider'
 
@@ -93,3 +94,10 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+LOG_ENABLED = True
+LOG_ENCODING = 'UTF-8'
+LOG_LEVEL = 'DEBUG' 
+to_day = datetime.datetime.now() 
+log_file_path = 'scrapy_{}_{}_{}.log'.format(to_day.year, to_day.month, to_day.day) 
+LOG_FILE = log_file_path 
