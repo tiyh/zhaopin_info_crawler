@@ -34,3 +34,12 @@ Scrapy + Selenium + PhantomJS + Redis
     or using release script :
     cd release/ && python release.py
 
+
+
+#### Redis:
+    redis-cli -h localhost -p 6379 {-a password} --raw
+
+    redis rdb default path in Ubuntu：/var/lib/redis/dump.rdb
+
+    echo "HGETALL qiancheng_zhengzhou" | redis-cli -h localhost -p 6379 {-a password} --raw >> qiancheng_zhengzhou_all.txt
+
