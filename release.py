@@ -7,7 +7,7 @@ if __name__ == '__main__':
 		psyco.profile()
 	except ImportError:
 		pass
-	tasks = ["zhaopin_nanjing","zhaopin_shijiazhuang","zhaopin_zhengzhou","zhaoping_hangzhou", \
+	tasks = ["zhaopin_nanjing","zhaopin_shijiazhuang","zhaopin_zhengzhou","zhaopin_hangzhou", \
 	"qiancheng_nanjing","qiancheng_shijiazhuang","qiancheng_zhengzhou","qiancheng_hangzhou"]
 	for task in tasks:
 		print('---------------spider_starting:%s-------------'%task)

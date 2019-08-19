@@ -12,7 +12,7 @@ import logging
 
 class BaseSpider(scrapy.Spider):
     name = "base"
-    new_element_name = "_new_2"
+    new_element_name = "_new_4"
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
         spider = super(BaseSpider,cls).from_crawler(crawler, *args, **kwargs)
