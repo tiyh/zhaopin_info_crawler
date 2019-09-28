@@ -13,4 +13,5 @@ class ZhaopinspiderItem(scrapy.Item):
     # name = scrapy.Field()
     title = scrapy.Field()
     phone = scrapy.Field()
+    mail = scrapy.Field()
     last_updated = scrapy.Field(serializer=str)
